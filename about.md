@@ -4,8 +4,34 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+## What is Knight of the Old Code?
 
-You can find the source code for the Jekyll new theme at: [github.com/jglovier/jekyll-new](https://github.com/jglovier/jekyll-new)
+Knight of the Old Code is the home of Tricorius. 
 
-You can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
+
+## Hosting
+
+Knight of the Old Code is hosted on the GitHub Pages platform, powered by Jekyll, a static website generator extraordinaire.
+
+### Versions:
+
+* jekyll: {{ versions.jekyll }}
+* kramdown: {{ versions.kramdown }}
+* liquid: {{ versions.liquid }}
+* maruku: {{ versions.maruku }}
+* rdiscount: {{ versions.rdiscount }}
+* redcarpet: {{ versions.redcarpet }}
+* RedCloth: {{ versions.RedCloth }}
+* jemoji: {{ versions.jemoji }}
+* jekyll-mentions: {{ versions.jekyll-mentions }}
+* jekyll-redirect-from: {{ versions.jekyll-redirect-from }}
+* jekyll-redirect-from: {{ versions.jekyll-redirect-from }}
+* jekyll-sitemap: {{ versions.jekyll-sitemap }}
+* github-pages: {{ versions.github-pages }}
+* ruby: {{ versions.ruby }}
+        
+### Repositories:
+
+{% for repository in site.github.repositories %}
+  * [{{ repository.name }}]({{ repository.html_url }})
+{% endfor %}
