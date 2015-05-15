@@ -9,6 +9,8 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://knightodtheoldcode.com" # the base hostname & protocol for your site
 github_username:  tricorius
 
+google_analytics: UA-62767058-1
+
 # Build settings
 markdown: kramdown
 
