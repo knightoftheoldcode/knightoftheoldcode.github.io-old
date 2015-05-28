@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "jekyll new . --force"
-date:   2015-05-09 02:55:13
+date:   2015-05-09 06:55:13
 description: "jekyll new . --force is the core of my jekyll project generation"
 categories: article
 tags:
@@ -43,6 +43,26 @@ $ jekyll new . --force
 This will configure a default Jekyll project template in your working directory set to keep in sync with GitHub Pages as they update their platform.
 
 A simple ```bundle install && bundle update``` will update your local environment.
+
+### Update: A sightly more dynamic Gemfile
+
+Those feeling a bit more adventorous can use a dynamic version of the Gemfile. (This is slightly more prone to errors with installed versions of Ruby and other Gemfile dependencies.)
+
+The below code takes advantage of the json and open-uri gems to parse the json version of the GitHub Pages - Versions page and fill in the appropriate versions.
+
+(A similar modification could be added to a bin/setup script which fetches the ruby version and runs rbenv install commands to ensure the proper version of ruby is installed on the machine.)
+
+{% highlight bash %}
+source 'https://rubygems.org'
+
+require 'json'
+require 'open-uri'
+versions = JSON.parse(open('https://pages.github.com/versions.json').read)
+
+ruby versions['ruby']
+
+gem 'github-pages', versions['github-pages']
+{% endhighlight %}
 
 [jekyll]:      http://jekyllrb.com
 [jekyll-gh]:   https://github.com/jekyll/jekyll
