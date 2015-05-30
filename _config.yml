@@ -8,6 +8,7 @@ description: > # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://knightoftheoldcode.com" # the base hostname & protocol for your site
 github_username:  tricorius
+twitter_username: tricorius
 
 google_analytics: UA-62767058-1
 
