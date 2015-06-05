@@ -1,216 +1,216 @@
 /*
-	The MIT License (MIT)
+  The MIT License (MIT)
 
-	Copyright (c) <2013> <Ren Aysha>
+  Copyright (c) <2013> <Ren Aysha>
 
-	Permission is hereby granted, free of charge, to any person obtaining a copy
-	of this software and associated documentation files (the "Software"), to deal
-	in the Software without restriction, including without limitation the rights
-	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	copies of the Software, and to permit persons to whom the Software is
-	furnished to do so, subject to the following conditions:
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
 
-	The above copyright notice and this permission notice shall be included in
-	all copies or substantial portions of the Software.
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
 
-	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-	THE SOFTWARE.
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  THE SOFTWARE.
 */
 
 if ( typeof Object.create !== 'function' ) {
-	Object.create = function( obj ) {
-		function F() {}
-		F.prototype = obj;
-		return new F();
-	};
+  Object.create = function( obj ) {
+    function F() {}
+    F.prototype = obj;
+    return new F();
+  };
 }
 
 (function( $, window, document, undefined ) {
-	"use strict";
+  "use strict";
 
-	var Anchorific = {
+  var Anchorific = {
 
-		init: function( options, elem ) {
-			var self = this;
+    init: function( options, elem ) {
+      var self = this;
 
-			self.elem = elem;
-			self.$elem = $( elem );
+      self.elem = elem;
+      self.$elem = $( elem );
 
-			self.opt = $.extend( {},  this.opt, options );
+      self.opt = $.extend( {},  this.opt, options );
 
-			self.headers = self.$elem.find( 'h1, h2, h3, h4, h5, h6' );
-			self.previous = 0;
+      self.headers = self.$elem.find( 'h1, h2, h3, h4, h5, h6' );
+      self.previous = 0;
 
-			// Fix bug #1
-			if ( self.headers.length !== 0 ) {
-				self.first = parseInt( self.headers.prop( 'nodeName' ).substring( 1 ), null );
-			}
-			
-			self.build();
-		},
+      // Fix bug #1
+      if ( self.headers.length !== 0 ) {
+        self.first = parseInt( self.headers.prop( 'nodeName' ).substring( 1 ), null );
+      }
 
-		opt: {
-			navigation: '.anchorific', // position of navigation
-			speed: 200, // speed of sliding back to top
-			anchorClass: 'anchor', // class of anchor links
-			anchorText: '#', // prepended or appended to anchor headings
-			top: '.top', // back to top button or link class
-			spy: true, // scroll spy
-			position: 'append', // position of anchor text
-			spyOffset: !0 // specify heading offset for spy scrolling
-		},
-		
-		build: function() {
-			var self = this, obj, navigations = function() {};
-			// when navigation configuration is set
-			if ( self.opt.navigation ) {
-				$( self.opt.navigation ).append( '<ul />' );
-				self.previous = $( self.opt.navigation ).find( 'ul' ).last();
-				navigations = function( obj ) {
-					return self.navigations( obj );
-				};
-			}
+      self.build();
+    },
 
-			for( var i = 0; i < self.headers.length; i++ ) {
-				obj = self.headers.eq( i );
-				navigations( obj );
-				self.anchor( obj );
-			}
+    opt: {
+      navigation: '.anchorific', // position of navigation
+      speed: 200, // speed of sliding back to top
+      anchorClass: 'anchor', // class of anchor links
+      anchorText: '#', // prepended or appended to anchor headings
+      top: '.top', // back to top button or link class
+      spy: true, // scroll spy
+      position: 'append', // position of anchor text
+      spyOffset: !0 // specify heading offset for spy scrolling
+    },
 
-			if ( self.opt.spy )
-				self.spy();
+    build: function() {
+      var self = this, obj, navigations = function() {};
+      // when navigation configuration is set
+      if ( self.opt.navigation ) {
+        $( self.opt.navigation ).append( '<ul />' );
+        self.previous = $( self.opt.navigation ).find( 'ul' ).last();
+        navigations = function( obj ) {
+          return self.navigations( obj );
+        };
+      }
 
-			if ( self.opt.top ) 
-				self.back();
-		},
-		
-		navigations: function( obj ) {
-			var self = this, link, list, which, name = self.name( obj );
+      for( var i = 0; i < self.headers.length; i++ ) {
+        obj = self.headers.eq( i );
+        navigations( obj );
+        self.anchor( obj );
+      }
 
-			if ( obj.attr( 'id' ) !== undefined )
-				name = obj.attr( 'id' );
+      if ( self.opt.spy )
+        self.spy();
 
-			link = $( '<a />' ).attr( 'href', '#' + name ).text( obj.text() );
-			list = $( '<li />' ).append( link ); 
+      if ( self.opt.top ) 
+        self.back();
+    },
 
-			which = parseInt( obj.prop( 'nodeName' ).substring( 1 ), null );
-			list.attr( 'data-tag', which );
+    navigations: function( obj ) {
+      var self = this, link, list, which, name = self.name( obj );
 
-			self.subheadings( which, list );
+      if ( obj.attr( 'id' ) !== undefined )
+        name = obj.attr( 'id' );
 
-			self.first = which;
-		},
+      link = $( '<a />' ).attr( 'href', '#' + name ).text( obj.text() );
+      list = $( '<li />' ).append( link ); 
 
-		subheadings: function( which, a ) {
-			var self = this, ul = $( self.opt.navigation ).find( 'ul' ),
-				li = $( self.opt.navigation ).find( 'li' );
+      which = parseInt( obj.prop( 'nodeName' ).substring( 1 ), null );
+      list.attr( 'data-tag', which );
 
-			if ( which === self.first ) {
-				self.previous.append( a );
-			} else if ( which > self.first ) {
-				li.last().append( '<ul />' );
-				// can't use cache ul; need to find ul once more
-				$( self.opt.navigation ).find( 'ul' ).last().append( a );
-				self.previous = a.parent();
-			} else {
-				$( 'li[data-tag=' + which + ']' ).last().parent().append( a );
-				self.previous = a.parent();
-			}
-		},
+      self.subheadings( which, list );
 
-		name: function( obj ) {
-			var name = obj.text().replace( /[^\w\s]/gi, '' )
-								.replace( /\s+/g, '-' )
-								.toLowerCase();
+      self.first = which;
+    },
 
-			return name;
-		},
+    subheadings: function( which, a ) {
+      var self = this, ul = $( self.opt.navigation ).find( 'ul' ),
+          li = $( self.opt.navigation ).find( 'li' );
 
-		anchor: function( obj ) {
-			var self = this, name = self.name( obj ), anchor, text = self.opt.anchorText,
-				klass = self.opt.anchorClass, id;
+      if ( which === self.first ) {
+        self.previous.append( a );
+      } else if ( which > self.first ) {
+        li.last().append( '<ul />' );
+        // can't use cache ul; need to find ul once more
+        $( self.opt.navigation ).find( 'ul' ).last().append( a );
+        self.previous = a.parent();
+      } else {
+        $( 'li[data-tag=' + which + ']' ).last().parent().append( a );
+        self.previous = a.parent();
+      }
+    },
 
-			if ( obj.attr( 'id' ) === undefined )
-				obj.attr( 'id', name );
+    name: function( obj ) {
+      var name = obj.text().replace( /[^\w\s]/gi, '' )
+      .replace( /\s+/g, '-' )
+      .toLowerCase();
 
-			id = obj.attr( 'id' );
+      return name;
+    },
 
-			anchor = $( '<a />' ).attr( 'href', '#' + id ).html( text ).addClass( klass );
+    anchor: function( obj ) {
+      var self = this, name = self.name( obj ), anchor, text = self.opt.anchorText,
+          klass = self.opt.anchorClass, id;
 
-			if ( self.opt.position === 'append' ) {
-				obj.append( anchor );
-			} else {
-				obj.prepend( anchor );
-			}
-		},
+      if ( obj.attr( 'id' ) === undefined )
+        obj.attr( 'id', name );
 
-		back: function() {
-			var self = this, body = $( 'body, html' ), top = $( self.opt.top );
+      id = obj.attr( 'id' );
 
-			top.on( 'click', function( e ) {
-				e.preventDefault();
+      anchor = $( '<a />' ).attr( 'href', '#' + id ).html( text ).addClass( klass );
 
-				body.animate({
-					'scrollTop': 0
-				}, self.opt.speed );
-			});
-		},
+      if ( self.opt.position === 'append' ) {
+        obj.append( anchor );
+      } else {
+        obj.prepend( anchor );
+      }
+    },
 
-		top: function( that ) {
-			var self = this, top = self.opt.top, back;
+    back: function() {
+      var self = this, body = $( 'body, html' ), top = $( self.opt.top );
 
-			if ( top !== false ) {
-				back = ( $( that ).scrollTop() > 200 ) ?
-						$( top ).fadeIn() :
-						$( top ).fadeOut();
-			}
-		},
+      top.on( 'click', function( e ) {
+        e.preventDefault();
 
-		spy: function() {
-			var self = this, previous, current, list, top, prev;
+        body.animate({
+          'scrollTop': 0
+        }, self.opt.speed );
+      });
+    },
 
-			$( window ).scroll( function( e ) {
-				// show links back to top
-				self.top( this );
-				// get all the header on top of the viewport
-				current = self.headers.map( function( e ) {
-					if ( ( $( this ).offset().top - $( window ).scrollTop() ) < self.opt.spyOffset ) {
-						return this;
-					}
-				});
-				// get only the latest header on the viewport
-				current = $( current ).eq( current.length - 1 );
+    top: function( that ) {
+      var self = this, top = self.opt.top, back;
 
-				if ( current && current.length ) {
-					// get all li tag that contains href of # ( all the parents )
-					list = $( 'li:has(a[href="#' + current.attr( 'id' ) + '"])' );
+      if ( top !== false ) {
+        back = ( $( that ).scrollTop() > 200 ) ?
+          $( top ).fadeIn() :
+        $( top ).fadeOut();
+      }
+    },
 
-					if ( prev !== undefined ) {
-						prev.removeClass( 'active' );
-					}
+    spy: function() {
+      var self = this, previous, current, list, top, prev;
 
-					list.addClass( 'active' );
-					prev = list;
-				}
-			});
-		}
-	};
+      $( window ).scroll( function( e ) {
+        // show links back to top
+        self.top( this );
+        // get all the header on top of the viewport
+        current = self.headers.map( function( e ) {
+          if ( ( $( this ).offset().top - $( window ).scrollTop() ) < self.opt.spyOffset ) {
+            return this;
+          }
+        });
+        // get only the latest header on the viewport
+        current = $( current ).eq( current.length - 1 );
 
-	$.fn.anchorific = function( options ) {
-		return this.each(function() {
-			if ( ! $.data( this, 'anchorific' ) ) {
-				var anchor = Object.create( Anchorific );
+        if ( current && current.length ) {
+          // get all li tag that contains href of # ( all the parents )
+          list = $( 'li:has(a[href="#' + current.attr( 'id' ) + '"])' );
 
-				anchor.init( options, this );
+          if ( prev !== undefined ) {
+            prev.removeClass( 'active' );
+          }
 
-				$.data( this, 'anchorific', anchor );
-			}
-		});
-	};
+          list.addClass( 'active' );
+          prev = list;
+        }
+      });
+    }
+  };
+
+  $.fn.anchorific = function( options ) {
+    return this.each(function() {
+      if ( ! $.data( this, 'anchorific' ) ) {
+        var anchor = Object.create( Anchorific );
+
+        anchor.init( options, this );
+
+        $.data( this, 'anchorific', anchor );
+      }
+    });
+  };
 
 })( jQuery, window, document );
