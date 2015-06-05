@@ -21,6 +21,9 @@ collections:
   books:
     output: true
     permalink: /books/:path/
+  tools:
+    output: true
+    permalink: /tools/:path/
     
 gems:
 - jekyll-mentions
