@@ -2,6 +2,7 @@
 
 [![Build Status](https://img.shields.io/travis/knightoftheoldcode/knightoftheoldcode.github.io/master.svg)](https://travis-ci.org/knightoftheoldcode/knightoftheoldcode.github.io)
 [![Code Climate](https://img.shields.io/codeclimate/github/knightoftheoldcode/knightoftheoldcode.github.io.svg)](https://codeclimate.com/github/knightoftheoldcode/knightoftheoldcode.github.io)
+[![Test Coverage](https://codeclimate.com/github/knightoftheoldcode/knightoftheoldcode.github.io/badges/coverage.svg)](https://codeclimate.com/github/knightoftheoldcode/knightoftheoldcode.github.io/coverage)
 [![GitHub Issues](https://img.shields.io/github/issues/knightoftheoldcode/knightoftheoldcode.github.io.svg)](https://github.com/knightoftheoldcode/knightoftheoldcode.github.io)
 
 By tricorius with help from [contributers](https://github.com/knightoftheoldcode/knightoftheoldcode.github.io/graphs/contributors)
