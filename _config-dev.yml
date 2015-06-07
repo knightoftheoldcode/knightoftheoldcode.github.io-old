@@ -6,8 +6,9 @@ description: > # this means to ignore newlines until "baseurl:"
   developer blog. He works on mind-numbingly huge legacy applications to put steak on
   the table while his side-gigs recently added salt and pepper shakers.
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://knightoftheoldcode.com" # the base hostname & protocol for your site
+url: "" # the base hostname & protocol for your site - blank for dev
 github_username:  tricorius
+twitter_username: tricorius
 
 # disabled for dev
 # google_analytics: UA-62767058-1
@@ -25,6 +26,8 @@ collections:
     output: true
     permalink: /tools/:path/
     
+exclude: [vendor]
+
 gems:
 - jekyll-mentions
 - jemoji
