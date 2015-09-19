@@ -10,7 +10,7 @@ tags:
 
 Very few things anger me more than seeing "localhost" in my Google Analytics code. While there are a few ways to help filter this data out at the server side (which you should probably do anyway) I really just don't like to see "development" data in my production data. (Unlike chocolate and peanut butter, they should remain fully isolated.)
 
-You *could* just comment out certain lines in your `_config.yml` file while developing. But what happens when you forget to uncomment them before a quick push? (It's even *more* irritating to see a huge gap in your analytics than to see "localhost" in there. 
+You *could* just comment out certain lines in your `_config.yml` file while developing. But what happens when you forget to uncomment them before a quick push? (It's even *more* irritating to see a huge gap in your analytics than to see "localhost" in there.
 
 :wink:
 
@@ -18,7 +18,7 @@ You *could* just comment out certain lines in your `_config.yml` file while deve
 
 What would a modern developer do? That's right...flip a table and start their own fork of the project!
 
-However, since those Jekyll folks have thought about nearly everything, fortuantely we don't need to do that.
+However, since those Jekyll folks have thought about nearly everything, fortunately we don't need to do that.
 
 (Note: the "config" flag is suppose to support chaining of yml files so that you can override settings in the main file with settings from latter files in the chain. I've not been super successful with this in practice, so I'm using an alternate method below. I'd prefer the chaining, so I will keep debugging it. If I get it working I'll provide updates to this article.)
 
@@ -29,11 +29,11 @@ However, since those Jekyll folks have thought about nearly everything, fortuant
 title: Knight of the Old Code
 email: tricorius@knightoftheoldcode.com
 description: > # this means to ignore newlines until "baseurl:"
-  Tricorius is the author of a few books and an incredibly popular (in his own mind) 
+  Tricorius is the author of a few books and an incredibly popular (in his own mind)
   developer blog. He works on mind-numbingly huge legacy applications to put steak on
   the table while his side-gigs recently added salt and pepper shakers.
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://knightodtheoldcode.com" # the base hostname & protocol for your site
+url: "http://knightoftheoldcode.com" # the base hostname & protocol for your site
 github_username:  tricorius
 
 google_analytics: UA-62767058-1
@@ -47,7 +47,7 @@ collections:
   books:
     output: true
     permalink: /books/:path/
-    
+
 gems:
 - jekyll-mentions
 - jemoji
@@ -84,11 +84,11 @@ You can see by reading the above code (and commenting out line 12 in the `_confi
 title: Knight of the Old Code
 email: tricorius@knightoftheoldcode.com
 description: > # this means to ignore newlines until "baseurl:"
-  Tricorius is the author of a few books and an incredibly popular (in his own mind) 
+  Tricorius is the author of a few books and an incredibly popular (in his own mind)
   developer blog. He works on mind-numbingly huge legacy applications to put steak on
   the table while his side-gigs recently added salt and pepper shakers.
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://knightodtheoldcode.com" # the base hostname & protocol for your site
+url: "http://knightoftheoldcode.com" # the base hostname & protocol for your site
 github_username:  tricorius
 
 # disabled for dev
@@ -103,7 +103,7 @@ collections:
   books:
     output: true
     permalink: /books/:path/
-    
+
 gems:
 - jekyll-mentions
 - jemoji
